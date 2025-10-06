@@ -1,0 +1,166 @@
+name: User Interface Improvement
+description: Request improvements to the website interface and user experience
+title: "[UI IMPROVEMENT] [Brief Description]"
+labels: ["enhancement", "ui", "user-experience", "teacher-request"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## User Interface Improvement Request
+        Use this template to request improvements to the website's user interface and user experience.
+        
+        **Please describe the current interface issue and your desired improvement clearly.**
+
+  - type: dropdown
+    id: ui-area
+    attributes:
+      label: Interface Area
+      description: Which part of the interface needs improvement?
+      options:
+        - "Activity cards and display"
+        - "Registration/login forms"
+        - "Search and filtering"
+        - "Navigation and layout"
+        - "Mobile/tablet responsiveness"
+        - "Teacher dashboard/controls"
+        - "Student information display"
+        - "Error messages and feedback"
+        - "Overall visual design"
+        - "Other (describe below)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-issue
+    attributes:
+      label: Current Issue
+      description: What is wrong with the current interface? What makes it difficult to use?
+      placeholder: |
+        Current behavior: [describe what happens now]
+        Problem: [why is this confusing or difficult]
+        When it happens: [specific situations or conditions]
+    validations:
+      required: true
+
+  - type: textarea
+    id: desired-improvement
+    attributes:
+      label: Desired Improvement
+      description: How should the interface work instead?
+      placeholder: |
+        Desired behavior: [describe how it should work]
+        Visual changes: [any specific visual improvements]
+        User experience: [how should it feel to use]
+    validations:
+      required: true
+
+  - type: dropdown
+    id: user-type
+    attributes:
+      label: Primary User
+      description: Who would benefit most from this improvement?
+      options:
+        - "Teachers (logged in users)"
+        - "Students and parents (visitors)"
+        - "Both teachers and visitors"
+        - "School administrators"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: device-types
+    attributes:
+      label: Device Types
+      description: Which devices should this improvement work on?
+      options:
+        - label: Desktop computers
+        - label: Tablets
+        - label: Mobile phones
+        - label: All devices (responsive design)
+
+  - type: textarea
+    id: specific-requirements
+    attributes:
+      label: Specific Requirements
+      description: Any specific design or functionality requirements?
+      placeholder: |
+        - Must be easy to use for non-technical teachers
+        - Should work on older devices/browsers
+        - Needs to match school colors/branding
+        - Should be accessible for users with disabilities
+
+  - type: checkboxes
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: How will you know this improvement is successful?
+      options:
+        - label: Interface is more intuitive and easier to navigate
+          required: true
+        - label: Reduces clicks/steps needed to complete common tasks
+          required: true
+        - label: Works consistently across different devices
+          required: true
+        - label: Maintains current functionality while improving usability
+          required: true
+        - label: Follows web accessibility best practices
+          required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples or References
+      description: Any examples of similar interfaces that work well, or specific visual references?
+      placeholder: e.g., "Like the card layout on [website]", "Similar to how [other system] handles this"
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How important is this improvement?
+      options:
+        - "High - Makes current tasks very difficult"
+        - "Medium - Would significantly improve efficiency"
+        - "Low - Nice-to-have enhancement"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other information that would help implement this improvement?
+      placeholder: e.g., "Teachers have complained about this", "Part of accessibility audit", "Student feedback"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Implementation Hints for Copilot Agent
+        
+        **UI Files to Review:**
+        - `src/static/index.html` - HTML structure and forms
+        - `src/static/app.js` - JavaScript interactions and UI behavior
+        - CSS styling (currently inline in HTML)
+        
+        **Design Principles:**
+        1. **Simplicity**: Teachers are not technical - keep interfaces simple and clear
+        2. **Consistency**: Match existing patterns and design elements
+        3. **Responsiveness**: Must work on all device sizes
+        4. **Accessibility**: Consider users with different abilities
+        5. **Feedback**: Provide clear messages for all user actions
+        
+        **Common UI Patterns:**
+        - Modal dialogs for forms (registration, login)
+        - Card-based layout for activities
+        - Filter buttons and search functionality
+        - Toast messages for success/error feedback
+        - Responsive grid layouts
+        
+        **Testing Considerations:**
+        - Test on different screen sizes
+        - Verify keyboard navigation works
+        - Check color contrast for accessibility
+        - Ensure touch targets are appropriate size
+        - Test with real content and edge cases

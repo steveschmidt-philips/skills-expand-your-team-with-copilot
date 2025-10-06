@@ -1,0 +1,188 @@
+name: General Feature Request
+description: Request a new feature that doesn't fit other template categories
+title: "[FEATURE] [Brief Description]"
+labels: ["enhancement", "feature-request", "teacher-request"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## General Feature Request
+        Use this template for feature requests that don't fit the other specific categories.
+        
+        **Please provide clear requirements so the Copilot agent can implement your request effectively.**
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: What new feature would you like to see added to the system?
+      placeholder: |
+        Feature: [describe the new functionality you want]
+        Purpose: [what problem would this solve or what benefit would it provide]
+        Users: [who would use this feature - teachers, students, admins]
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-limitation
+    attributes:
+      label: Current Limitation
+      description: What can't you do right now that this feature would enable?
+      placeholder: |
+        Current situation: [describe what you have to do now]
+        Limitation: [what is missing or inadequate]
+        Impact: [how this limitation affects your work]
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: How do you envision this feature working?
+      placeholder: |
+        How it should work: [step-by-step description]
+        User interface: [how users would interact with it]
+        Integration: [how it fits with existing features]
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature-category
+    attributes:
+      label: Feature Category
+      description: What type of feature is this?
+      options:
+        - "Reporting and data export"
+        - "Communication and notifications"
+        - "Calendar and scheduling"
+        - "Analytics and statistics"
+        - "Integration with other systems"
+        - "Administrative tools"
+        - "Parent/guardian features"
+        - "Accessibility improvements"
+        - "Performance and efficiency"
+        - "Other (describe in feature description)"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: technical-requirements
+    attributes:
+      label: Technical Requirements
+      description: Any specific technical requirements or constraints?
+      options:
+        - label: Must work with existing authentication system
+        - label: Should integrate with current database structure
+        - label: Must be mobile-friendly/responsive
+        - label: Should follow existing UI patterns
+        - label: Must maintain system security
+        - label: Should be easy for non-technical teachers to use
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How important is this feature to your work?
+      options:
+        - "High - Essential for effective teaching/administration"
+        - "Medium - Would significantly improve efficiency"
+        - "Low - Nice-to-have enhancement"
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternative-solutions
+    attributes:
+      label: Alternative Solutions
+      description: Have you considered any alternative approaches to solve this problem?
+      placeholder: |
+        Other options considered: [other ways to address the need]
+        Why this approach: [why your proposed solution is better]
+
+  - type: checkboxes
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: How will you know this feature is working correctly?
+      options:
+        - label: Feature solves the described problem effectively
+          required: true
+        - label: Feature is intuitive and easy to use
+          required: true
+        - label: Feature integrates well with existing functionality
+          required: true
+        - label: Feature works reliably across different devices
+          required: true
+        - label: Feature doesn't negatively impact system performance
+          required: true
+
+  - type: textarea
+    id: success-metrics
+    attributes:
+      label: Success Metrics
+      description: How would you measure if this feature is successful?
+      placeholder: |
+        Success would mean:
+        - [specific measurable outcome]
+        - [behavior change or efficiency gain]
+        - [user satisfaction improvement]
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other information that would help implement this feature?
+      placeholder: |
+        Examples from other systems: [if you've seen similar features elsewhere]
+        Compliance requirements: [any regulatory or policy requirements]
+        Timeline considerations: [when this is needed]
+        Budget constraints: [any cost considerations]
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Implementation Hints for Copilot Agent
+        
+        **Feature Development Process:**
+        1. **Analyze Requirements**: Understand the core need and constraints
+        2. **Design Solution**: Plan the technical approach and user interface
+        3. **Implement Backend**: Add necessary API endpoints and database changes
+        4. **Implement Frontend**: Create user interface and interactions
+        5. **Test Thoroughly**: Verify feature works as expected
+        6. **Document**: Update any relevant documentation
+        
+        **System Architecture Overview:**
+        - **Backend**: FastAPI with MongoDB database
+        - **Frontend**: HTML/CSS/JavaScript (vanilla, no frameworks)
+        - **Authentication**: Session-based with teacher login
+        - **API Pattern**: RESTful endpoints under `/activities` and `/auth`
+        
+        **Code Organization:**
+        ```
+        src/
+        ├── app.py                 # Main FastAPI application
+        ├── backend/
+        │   ├── database.py        # Database connection and initialization
+        │   └── routers/
+        │       ├── activities.py  # Activity management endpoints
+        │       └── auth.py        # Authentication endpoints
+        └── static/
+            ├── index.html         # Main webpage
+            └── app.js            # Frontend JavaScript
+        ```
+        
+        **Development Guidelines:**
+        - Keep code simple and maintainable for non-technical staff
+        - Follow existing patterns and conventions
+        - Ensure all features work without additional dependencies
+        - Test with realistic data and edge cases
+        - Maintain responsive design for all device types
+        
+        **Common Integration Points:**
+        - Authentication: Use existing teacher session validation
+        - Database: Extend existing MongoDB collections or add new ones
+        - UI: Follow existing modal/form patterns in app.js
+        - API: Follow FastAPI patterns with proper error handling

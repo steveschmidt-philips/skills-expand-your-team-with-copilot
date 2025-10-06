@@ -1,0 +1,184 @@
+name: Authentication & Access Control
+description: Request changes to user authentication, permissions, or access control
+title: "[AUTH] [Brief Description]"
+labels: ["enhancement", "authentication", "security", "teacher-request"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Authentication & Access Control Request
+        Use this template to request changes to user authentication, teacher permissions, or access control features.
+        
+        **⚠️ Security Note: These changes affect system security. Please provide clear justification and requirements.**
+
+  - type: dropdown
+    id: auth-type
+    attributes:
+      label: Type of Authentication Change
+      description: What kind of authentication or access control change is needed?
+      options:
+        - "Add new teacher account"
+        - "Modify teacher permissions/roles"
+        - "Password reset functionality"
+        - "Session timeout settings"
+        - "Multi-factor authentication"
+        - "Role-based access control"
+        - "Password policy changes"
+        - "Login attempt limitations"
+        - "Other security enhancement"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: Problem Description
+      description: What security or access issue needs to be addressed?
+      placeholder: |
+        Current situation: [describe current authentication setup]
+        Security concern: [what security risk or access problem exists]
+        Impact: [how this affects teachers or system security]
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: How should this authentication issue be resolved?
+      placeholder: |
+        Proposed change: [describe the authentication change needed]
+        Implementation: [how it should work technically]
+        User experience: [how teachers would interact with the new system]
+    validations:
+      required: true
+
+  - type: textarea
+    id: new-account-details
+    attributes:
+      label: New Teacher Account Details (if applicable)
+      description: If requesting a new teacher account, provide the required information
+      placeholder: |
+        Username: [preferred username]
+        Display Name: [full name for display]
+        Role: [teacher/admin]
+        Initial Password: [temporary password - will need to be changed]
+        Justification: [why this account is needed]
+
+  - type: checkboxes
+    id: security-requirements
+    attributes:
+      label: Security Requirements
+      description: What security standards must be maintained?
+      options:
+        - label: Passwords must be securely hashed (no plain text storage)
+          required: true
+        - label: Session management must be secure
+          required: true
+        - label: Failed login attempts should be logged/limited
+          required: true
+        - label: Changes must not expose sensitive information
+          required: true
+        - label: Must maintain principle of least privilege
+
+  - type: textarea
+    id: compatibility-requirements
+    attributes:
+      label: Compatibility Requirements
+      description: Any requirements for compatibility with existing systems or future changes?
+      placeholder: |
+        - Must work with existing teacher accounts
+        - Should be compatible with [other system]
+        - Must support [specific requirement]
+
+  - type: checkboxes
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: How will you verify this authentication change is working correctly?
+      options:
+        - label: Authentication works reliably for all authorized users
+          required: true
+        - label: Unauthorized access is properly prevented
+          required: true
+        - label: Existing teacher accounts continue to work normally
+          required: true
+        - label: Security measures are properly implemented
+          required: true
+        - label: Error messages are helpful but don't reveal sensitive information
+          required: true
+
+  - type: textarea
+    id: testing-plan
+    attributes:
+      label: Testing Plan
+      description: How should this authentication change be tested?
+      placeholder: |
+        Test scenarios:
+        1. [Valid login scenario]
+        2. [Invalid login scenario]
+        3. [Edge case scenario]
+        4. [Security test scenario]
+
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: Urgency Level
+      description: How urgent is this security change?
+      options:
+        - "Critical - Security vulnerability that needs immediate attention"
+        - "High - Important for upcoming semester/operations"
+        - "Medium - Should be addressed soon"
+        - "Low - Improvement that can wait"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other security considerations or context?
+      placeholder: e.g., "Required for compliance", "Part of security audit", "Addresses recent incident"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Implementation Hints for Copilot Agent
+        
+        **Security-Critical Files:**
+        - `src/backend/routers/auth.py` - authentication endpoints and logic
+        - `src/backend/database.py` - password hashing and teacher account data
+        - `src/static/app.js` - frontend authentication handling
+        
+        **Security Best Practices:**
+        1. **Password Security**: Use existing Argon2 hashing (PasswordHasher)
+        2. **Session Management**: Maintain existing session patterns
+        3. **Input Validation**: Validate all authentication inputs
+        4. **Error Handling**: Don't leak information in error messages
+        5. **Logging**: Log authentication events for security monitoring
+        
+        **Current Authentication Flow:**
+        1. User submits username/password via `/auth/login`
+        2. Password is hashed with Argon2 and compared to stored hash
+        3. Valid login returns user info (username, display_name, role)
+        4. Frontend stores user info and includes username in subsequent requests
+        5. Protected endpoints verify teacher exists before allowing actions
+        
+        **Database Schema for Teachers:**
+        ```python
+        {
+            "_id": "username",
+            "username": "username",
+            "display_name": "Display Name",
+            "password": "argon2_hashed_password",
+            "role": "teacher" | "admin"
+        }
+        ```
+        
+        **Testing Security Changes:**
+        - Test valid and invalid credentials
+        - Verify password hashing works correctly
+        - Check authorization for protected endpoints
+        - Ensure no sensitive data leaks in responses

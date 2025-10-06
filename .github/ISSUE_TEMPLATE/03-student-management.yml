@@ -1,0 +1,137 @@
+name: Student Management Feature
+description: Request new features for managing student participation
+title: "[STUDENT FEATURE] [Brief Description]"
+labels: ["enhancement", "student-management", "teacher-request"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Student Management Feature Request
+        Use this template to request new features related to managing student participation in activities.
+        
+        **Please provide clear requirements so the Copilot agent can implement the feature correctly.**
+
+  - type: dropdown
+    id: feature-type
+    attributes:
+      label: Type of Feature
+      description: What type of student management feature do you need?
+      options:
+        - "Bulk student registration (upload CSV/list)"
+        - "Student waitlist for full activities"
+        - "Export student roster for an activity"
+        - "Email notifications to students"
+        - "Student attendance tracking"
+        - "Grade level restrictions for activities"
+        - "Student profile/information display"
+        - "Transfer student between activities"
+        - "Other (describe below)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: Problem Description
+      description: What challenge are you trying to solve? What is the current process and why is it inadequate?
+      placeholder: |
+        Current situation: [describe current process]
+        Problem: [what makes it difficult or time-consuming]
+        Impact: [how this affects teachers/students]
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: Describe how you envision this feature working
+      placeholder: |
+        How it should work: [step-by-step process]
+        User interface: [how teachers would interact with it]
+        Expected outcome: [what should happen]
+    validations:
+      required: true
+
+  - type: textarea
+    id: specific-requirements
+    attributes:
+      label: Specific Requirements
+      description: List any specific requirements or constraints
+      placeholder: |
+        - Must work for all activities
+        - Should integrate with existing teacher login
+        - Needs to handle [specific scenario]
+        - Should prevent [specific issue]
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How urgent is this feature?
+      options:
+        - "High - Needed for upcoming semester"
+        - "Medium - Would be helpful to have soon"
+        - "Low - Nice to have when possible"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Define what "done" looks like (check all that apply)
+      options:
+        - label: Feature is accessible to logged-in teachers only
+          required: true
+        - label: Feature works consistently across all activities
+          required: true
+        - label: Clear error messages for invalid operations
+          required: true
+        - label: Feature doesn't break existing functionality
+          required: true
+        - label: User interface is intuitive and simple to use
+          required: true
+
+  - type: textarea
+    id: test-scenarios
+    attributes:
+      label: Test Scenarios
+      description: How should this feature be tested? What scenarios should work?
+      placeholder: |
+        Test case 1: [scenario and expected result]
+        Test case 2: [scenario and expected result]
+        Edge case: [unusual scenario and how it should be handled]
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other information that would help implement this feature?
+      placeholder: e.g., "Similar to how other school systems work", "Must comply with privacy requirements"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Implementation Hints for Copilot Agent
+        
+        **Key Considerations:**
+        1. **Authentication**: All student management features require teacher login
+        2. **Data Validation**: Ensure student emails are valid Mergington format (@mergington.edu)
+        3. **Error Handling**: Provide clear feedback for all operations
+        4. **UI Consistency**: Match existing design patterns in app.js and index.html
+        5. **Database Operations**: Use existing MongoDB collections and patterns
+        
+        **Code Areas to Review:**
+        - `src/backend/routers/activities.py` - existing registration endpoints
+        - `src/backend/routers/auth.py` - authentication patterns
+        - `src/static/app.js` - UI interaction patterns
+        - `src/static/index.html` - form and modal patterns
+        
+        **Technical Patterns:**
+        - Follow existing FastAPI endpoint patterns
+        - Use existing error handling with HTTPException
+        - Maintain consistent frontend JavaScript patterns
+        - Ensure responsive design works on all devices
