@@ -1,0 +1,176 @@
+name: Bug Report
+description: Report a problem or error in the High School Management System
+title: "[BUG] [Brief Description]"
+labels: ["bug", "teacher-request"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug Report
+        Use this template to report bugs, errors, or unexpected behavior in the High School Management System.
+        
+        **Please provide detailed information so the Copilot agent can understand and fix the issue.**
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Bug Description
+      description: What is the bug? What is happening that shouldn't be happening?
+      placeholder: |
+        What happened: [describe the unexpected behavior]
+        What should happen: [describe the expected behavior]
+        When it occurs: [when does this problem show up]
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can someone else reproduce this bug?
+      placeholder: |
+        1. Go to [page/section]
+        2. Click on [button/link]
+        3. Enter [specific information]
+        4. [describe what happens]
+    validations:
+      required: true
+
+  - type: dropdown
+    id: bug-area
+    attributes:
+      label: Area of the System
+      description: Which part of the system has the bug?
+      options:
+        - "Teacher login/authentication"
+        - "Student registration for activities"
+        - "Student unregistration from activities"
+        - "Activity display/listing"
+        - "Search and filtering"
+        - "Activity capacity management"
+        - "Error messages"
+        - "Mobile/tablet display"
+        - "Overall website functionality"
+        - "Other (describe in bug description)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: How Often Does This Happen?
+      description: How frequently does this bug occur?
+      options:
+        - "Always - happens every time"
+        - "Often - happens most of the time"
+        - "Sometimes - happens occasionally"
+        - "Rarely - happened once or twice"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: devices-affected
+    attributes:
+      label: Devices Affected
+      description: Which devices show this problem?
+      options:
+        - "Desktop computers only"
+        - "Tablets only"
+        - "Mobile phones only"
+        - "All devices"
+        - "Some devices (specify in description)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-messages
+    attributes:
+      label: Error Messages
+      description: Are there any error messages? Copy them exactly here.
+      placeholder: |
+        Error message: [copy exact text of any error messages]
+        Where it appears: [on screen, in console, etc.]
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact Level
+      description: How much does this bug affect your work?
+      options:
+        - "Critical - Cannot perform essential tasks"
+        - "High - Makes tasks very difficult or time-consuming"
+        - "Medium - Causes inconvenience but workarounds exist"
+        - "Low - Minor issue that doesn't affect main tasks"
+    validations:
+      required: true
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround (if any)
+      description: Have you found any way to work around this problem?
+      placeholder: e.g., "If I refresh the page, it works", "Using a different browser helps"
+
+  - type: checkboxes
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: How will you know the bug is fixed?
+      options:
+        - label: The reported behavior no longer occurs
+          required: true
+        - label: The system works as expected in the described scenario
+          required: true
+        - label: Fix doesn't break other existing functionality
+          required: true
+        - label: Fix works consistently across different devices/browsers
+          required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other information that might help fix this bug?
+      placeholder: |
+        Browser: [Chrome, Firefox, Safari, etc.]
+        Operating System: [Windows, Mac, iPad, etc.]
+        Time when bug occurred: [approximate date/time]
+        Other relevant details: [anything else that might be helpful]
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Implementation Hints for Copilot Agent
+        
+        **Bug Investigation Process:**
+        1. **Reproduce the Bug**: Follow the steps to reproduce on your test system
+        2. **Identify Root Cause**: Check relevant code files and logs
+        3. **Implement Fix**: Make minimal changes to resolve the issue
+        4. **Test Thoroughly**: Verify fix works and doesn't break other features
+        
+        **Common Bug Areas and Files:**
+        
+        **Frontend Issues** (`src/static/`):
+        - `app.js` - JavaScript errors, event handling, AJAX calls
+        - `index.html` - HTML structure, form validation, styling
+        
+        **Backend Issues** (`src/backend/`):
+        - `routers/activities.py` - activity registration/unregistration logic
+        - `routers/auth.py` - authentication and session management
+        - `database.py` - database operations and data integrity
+        
+        **Common Bug Patterns:**
+        - **Authentication**: Session validation, password handling
+        - **Data Validation**: Email format, capacity limits, duplicate registrations
+        - **Error Handling**: Missing try/catch blocks, unclear error messages
+        - **UI State**: Modal dialogs, form resets, loading states
+        - **Database**: Connection issues, data consistency, transaction handling
+        
+        **Testing Approach:**
+        1. Test the specific reported scenario
+        2. Test edge cases around the bug area
+        3. Test with different user roles (logged in/out)
+        4. Test on different devices if device-specific
+        5. Verify existing functionality still works

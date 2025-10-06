@@ -1,0 +1,145 @@
+name: Modify Existing Activity
+description: Request changes to an existing extracurricular activity
+title: "[MODIFY ACTIVITY] Update [Activity Name]"
+labels: ["enhancement", "activity", "teacher-request", "modification"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Modify Existing Activity Request
+        Use this template to request changes to an existing extracurricular activity.
+        
+        **Please provide specific details about what needs to be changed so the Copilot agent can implement your request accurately.**
+
+  - type: dropdown
+    id: activity-name
+    attributes:
+      label: Activity to Modify
+      description: Which activity needs to be modified?
+      options:
+        - "Programming Club"
+        - "Morning Fitness"
+        - "Soccer Team"
+        - "Art Club"
+        - "Drama Club"
+        - "Math Club"
+        - "Debate Team"
+        - "Weekend Robotics Workshop"
+        - "Manga Maniacs"
+        - "Other (specify in description)"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: changes-needed
+    attributes:
+      label: What needs to be changed?
+      description: Select all that apply
+      options:
+        - label: Schedule (days and/or times)
+        - label: Description
+        - label: Maximum participant capacity
+        - label: Activity name
+        - label: Other (explain in description below)
+
+  - type: textarea
+    id: schedule-changes
+    attributes:
+      label: Schedule Changes
+      description: If changing schedule, provide the new meeting days and times
+      placeholder: |
+        Current schedule: [current schedule]
+        New schedule: [new days and times in 24-hour format]
+        Reason for change: [explain why]
+
+  - type: textarea
+    id: description-changes
+    attributes:
+      label: Description Changes
+      description: If changing description, provide the new description
+      placeholder: |
+        Current description: [current description]
+        New description: [updated description]
+        Reason for change: [explain why]
+
+  - type: input
+    id: capacity-changes
+    attributes:
+      label: Capacity Changes
+      description: If changing maximum participants, enter the new limit
+      placeholder: e.g., "Change from 20 to 25 students"
+
+  - type: textarea
+    id: other-changes
+    attributes:
+      label: Other Changes
+      description: Describe any other modifications needed
+      placeholder: Explain what specific changes are needed and why
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: Reason for Changes
+      description: Why are these changes needed?
+      placeholder: e.g., "Room availability changed", "Increased student interest", "Equipment limitations"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Confirm what should be completed (check all that apply)
+      options:
+        - label: Activity information is updated in the database
+          required: true
+        - label: Changes are reflected on the website immediately
+          required: true
+        - label: Existing student registrations are preserved (unless capacity is reduced)
+          required: true
+        - label: Teachers can continue to manage student registrations normally
+          required: true
+        - label: Activity filtering still works correctly with new schedule
+          required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other information that would help implement these changes?
+      placeholder: e.g., "This change affects the fall semester only", "Coordinate with facilities management"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Implementation Hints for Copilot Agent
+        
+        **Code Changes Needed:**
+        1. Locate the activity in `initial_activities` dictionary in `src/backend/database.py`
+        2. Update the relevant fields (description, schedule, schedule_details, max_participants)
+        3. If reducing capacity, consider how to handle existing registrations
+        4. If changing schedule_details, update both readable schedule string and structured schedule_details object
+        5. Test the changes thoroughly
+        
+        **Data Structure Reference:**
+        ```python
+        "Activity Name": {
+            "description": "Activity description",
+            "schedule": "Human readable schedule",
+            "schedule_details": {
+                "days": ["Monday", "Wednesday"],
+                "start_time": "15:30",
+                "end_time": "17:00"
+            },
+            "max_participants": 20,
+            "participants": ["student@email.com"]
+        }
+        ```
+        
+        **Testing:**
+        - Verify changes appear correctly in UI
+        - Test filtering by new schedule
+        - Confirm registration/unregistration still works
+        - Check capacity enforcement if limit changed

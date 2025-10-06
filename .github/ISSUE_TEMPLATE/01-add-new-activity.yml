@@ -1,0 +1,107 @@
+name: Add New Activity
+description: Request to add a new extracurricular activity to the system
+title: "[NEW ACTIVITY] Add [Activity Name]"
+labels: ["enhancement", "activity", "teacher-request"]
+assignees:
+  - copilot
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Add New Activity Request
+        Use this template to request adding a new extracurricular activity to the Mergington High School system.
+        
+        **Please fill out all sections to ensure the Copilot agent can implement your request correctly.**
+
+  - type: input
+    id: activity-name
+    attributes:
+      label: Activity Name
+      description: What is the name of the new activity?
+      placeholder: e.g., "Chess Club", "Photography Club", "Advanced Science Lab"
+    validations:
+      required: true
+
+  - type: textarea
+    id: activity-description
+    attributes:
+      label: Activity Description
+      description: Provide a detailed description of the activity (what students will do, learn, or experience)
+      placeholder: e.g., "Students will learn strategic thinking and problem-solving through competitive chess matches and tournaments"
+    validations:
+      required: true
+
+  - type: input
+    id: schedule-days
+    attributes:
+      label: Meeting Days
+      description: Which days of the week will this activity meet?
+      placeholder: e.g., "Monday, Wednesday", "Tuesday", "Friday"
+    validations:
+      required: true
+
+  - type: input
+    id: schedule-time
+    attributes:
+      label: Meeting Time
+      description: What time will the activity meet? (Use 24-hour format)
+      placeholder: e.g., "15:30 - 17:00" (3:30 PM - 5:00 PM)
+    validations:
+      required: true
+
+  - type: input
+    id: max-participants
+    attributes:
+      label: Maximum Participants
+      description: What is the maximum number of students that can participate?
+      placeholder: e.g., "15", "25", "30"
+    validations:
+      required: true
+
+  - type: textarea
+    id: special-requirements
+    attributes:
+      label: Special Requirements or Equipment
+      description: Are there any special requirements, equipment, or materials needed for this activity?
+      placeholder: e.g., "Requires access to computer lab", "Need art supplies budget", "No special requirements"
+
+  - type: checkboxes
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Confirm what should be completed (check all that apply)
+      options:
+        - label: Add the new activity to the database with correct schedule information
+          required: true
+        - label: Activity should appear in the main activities list on the website
+          required: true
+        - label: Teachers should be able to register/unregister students for this activity
+          required: true
+        - label: Activity should be filterable by day and time in the UI
+          required: true
+        - label: Capacity limits should be enforced (shows "Activity Full" when at max participants)
+          required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Any other information that would help implement this activity?
+      placeholder: e.g., "This activity is meant to prepare students for state competitions", "Part of our STEM initiative"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Implementation Hints for Copilot Agent
+        
+        **Code Changes Needed:**
+        1. Add new activity entry to `initial_activities` dictionary in `src/backend/database.py`
+        2. Follow the existing data structure with fields: description, schedule, schedule_details (days, start_time, end_time), max_participants, participants
+        3. Restart the application to initialize the new activity in the database
+        4. Test that the activity appears correctly in the web interface
+        
+        **Testing:**
+        - Verify activity appears in activities list
+        - Test teacher login and student registration for the new activity
+        - Confirm filtering works correctly
+        - Check capacity enforcement
